@@ -1,0 +1,23 @@
+{
+  "name": "hashmap-library",
+  "version": "1.0.0",
+  "description": "A HasMap/HashMapObservable library for Typescript",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nebtex/hashmap.git"
+  },
+  "keywords": [
+    "HashMap",
+    "ObservableHashMap"
+  ],
+  "author": "NebTex",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nebtex/hashmap/issues"
+  },
+  "homepage": "https://github.com/nebtex/hashmap#readme"
+}
