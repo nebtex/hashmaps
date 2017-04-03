@@ -2,7 +2,8 @@
   "name": "hashmap-library",
   "version": "1.0.0",
   "description": "A HasMap/HashMapObservable library for Typescript",
-  "main": "index.js",
+  "main": "js/index.js",
+  "typings": "js/index",
   "scripts": {
     "test": "jest"
   },
