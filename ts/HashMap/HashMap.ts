@@ -14,18 +14,14 @@ export default class HashMap<K extends ObjectWithHash, V> {
     }
 
     set(key: K, value: V) {
-        if(key.hash === undefined)
-            key.hash = function() { return objectHash(JSON.stringify(key))};
-                
-        this.internalMap.set(key.hash(), value);
-        this.keyMap.set(key.hash(), key);
+        const hash = key.hash ? key.hash() : objectHash(key);
+        this.internalMap.set(hash, value);
+        this.keyMap.set(hash, key);
     }
 
     get(key: K): V {
-        if(key.hash === undefined)
-            key.hash = function() { return objectHash(JSON.stringify(key))};
-        
-        return this.internalMap.get(key.hash());
+        const hash = key.hash ? key.hash() : objectHash(key);
+        return this.internalMap.get(hash);
     }
 
     clear() {
@@ -34,7 +30,8 @@ export default class HashMap<K extends ObjectWithHash, V> {
     }
 
     has(key: K): boolean {
-        return this.internalMap.has(key.hash())
+        const hash = key.hash ? key.hash() : objectHash(key);        
+        return this.internalMap.has(hash)
     }
 
     get size(): number {
@@ -56,8 +53,9 @@ export default class HashMap<K extends ObjectWithHash, V> {
     }
 
     delete(key: K) {
-        this.internalMap.delete(key.hash());
-        this.keyMap.delete(key.hash());
+        const hash = key.hash ? key.hash() : objectHash(key);        
+        this.internalMap.delete(hash);
+        this.keyMap.delete(hash);
     }
 
     forEach(callBack:{(value?:V, key?: K, hashMap?:HashMap<K,V>):void}){
