@@ -1,15 +1,19 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "noImplicitAny": false,
-    "removeComments": true,
-    "noLib": false,
+    "lib": [
+      "dom",
+      "es2015",
+      "es5",
+      "es6"
+    ],
+    "typeRoots" : ["types"],
+    "noImplicitAny": true,
+    "outDir": "./dist/",
     "preserveConstEnums": true,
-    "declaration": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "outDir": "../js",
+    "removeComments": true,
     "experimentalDecorators": true,
-    "target": "es5"
+    "target": "ES5"
   },
   "exclude": [
     "node_modules",

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A HasMap/HashMapObservable library for Typescript",
   "main": "js/index.js",
+  "module": "commonjs",
   "typings": "js/index",
   "scripts": {
     "test": "jest"
@@ -20,5 +21,33 @@
   "bugs": {
     "url": "https://github.com/nebtex/hashmap/issues"
   },
-  "homepage": "https://github.com/nebtex/hashmap#readme"
+  "homepage": "https://github.com/nebtex/hashmap#readme",
+  "jest": {
+    "collectCoverage": true,
+    "coverageDirectory": "./coverage/",
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/api"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(scss)$": "identity-obj-proxy"
+    },
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "automock": false
+  },
+  "devDependencies": {
+    "@types/core-js": "^0.9.41",
+    "@types/jest": "^19.2.2",
+    "jest": "^19.0.2",
+    "ts-jest": "^19.0.7",
+    "typescript": "^2.2.2"
+  }
 }
