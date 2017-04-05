@@ -70,4 +70,32 @@ describe('HashMap', () => {
     hashMap.delete(testObjectWithHash);
     expect(hashMap.size).toBe(1);
   });
+
+  it('should iterate over all items and returns value, key and itself with forEach method', () => {
+    const keys = [
+      new TestClassWithHash('testname'), 
+      new TestClassWithHash('testname1'), 
+      new TestClassWithHash('testname2')
+    ];
+
+    const values = [
+      {phoneNumber: '333-22-331', email: 'test@gmail.com'},
+      {phoneNumber: '333-22-323', email: 'test1@gmail.com'},
+      {phoneNumber: '333-22-313', email: 'test2@gmail.com'}
+    ];
+    
+    keys.forEach((key, index) => {
+      hashMap.set(key, values[index]);
+    });
+    
+    let counter = 0;
+
+    hashMap.forEach((value, key, callBackHashMap) => {
+      expect(JSON.stringify(value)).toBe(JSON.stringify(values[counter]));
+      expect(key.hash()).toBe(keys[counter].hash());
+      expect(hashMap).toBe(callBackHashMap);
+      counter++;
+    });
+    expect(counter).toBe(hashMap.size);
+  });
 });

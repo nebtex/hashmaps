@@ -41,4 +41,10 @@ export default class HashMap<K extends ObjectWithHash, V> {
         this.internalMap.delete(key.hash());
         this.keyMap.delete(key.hash());
     }
+
+    forEach(callBack:{(value?:V, key?: K, hashMap?:HashMap<K,V>):void}){
+        this.keyMap.forEach((keyItem, hash) => {
+            callBack(this.internalMap.get(hash), keyItem, this);
+        });
+    }
 }
