@@ -1,5 +1,7 @@
+import * as objectHash from 'object-hash';
+
 export interface ObjectWithHash {
-    hash(): string
+    hash?: {():string}
 }
 
 export default class HashMap<K extends ObjectWithHash, V> {
@@ -12,11 +14,17 @@ export default class HashMap<K extends ObjectWithHash, V> {
     }
 
     set(key: K, value: V) {
+        if(key.hash === undefined)
+            key.hash = function() { return objectHash(JSON.stringify(key))};
+                
         this.internalMap.set(key.hash(), value);
         this.keyMap.set(key.hash(), key);
     }
 
     get(key: K): V {
+        if(key.hash === undefined)
+            key.hash = function() { return objectHash(JSON.stringify(key))};
+        
         return this.internalMap.get(key.hash());
     }
 

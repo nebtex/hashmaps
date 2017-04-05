@@ -141,4 +141,10 @@ describe('HashMap', () => {
     expect(entries.next().value).toEqual([keys[1], values[1]]);
     expect(entries.next().value).toEqual([keys[2], values[2]]);
   });
+
+  it('should set an item correctly when key value does not have a hash function', () => {
+    const hashMap = new HashMap<any, number>()
+    hashMap.set({a:1, b:2}, 80)
+    expect(hashMap.get({a:1, b:2})).toBe(80)
+  });
 });
