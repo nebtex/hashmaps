@@ -57,8 +57,28 @@ describe('HashMap', () => {
     expect(hashMap.has(testObjectWithHash)).toBe(true);
   });
 
-  it('should return all the values', () => {
-    //@TODO: How to test this?
+  it('should return all the values as iterable', () => {
+    const keys = [
+      new TestClassWithHash('testname'), 
+      new TestClassWithHash('testname1'), 
+      new TestClassWithHash('testname2')
+    ];
+
+    const values = [
+      {phoneNumber: '333-22-331', email: 'test@gmail.com'},
+      {phoneNumber: '333-22-323', email: 'test1@gmail.com'},
+      {phoneNumber: '333-22-313', email: 'test2@gmail.com'}
+    ];
+    
+    keys.forEach((key, index) => {
+      hashMap.set(key, values[index]);
+    });
+
+    const obtainedValues = hashMap.values();
+    expect(obtainedValues.next().value).toEqual(values[0]);
+    expect(obtainedValues.next().value).toEqual(values[1]);
+    expect(obtainedValues.next().value).toEqual(values[2]);
+
   });
 
   it('should delete an item', () => {
@@ -97,5 +117,28 @@ describe('HashMap', () => {
       counter++;
     });
     expect(counter).toBe(hashMap.size);
+  });
+
+  it('should return all its entries', () => {
+    const keys = [
+      new TestClassWithHash('testname'), 
+      new TestClassWithHash('testname1'), 
+      new TestClassWithHash('testname2')
+    ];
+
+    const values = [
+      {phoneNumber: '333-22-331', email: 'test@gmail.com'},
+      {phoneNumber: '333-22-323', email: 'test1@gmail.com'},
+      {phoneNumber: '333-22-313', email: 'test2@gmail.com'}
+    ];
+    
+    keys.forEach((key, index) => {
+      hashMap.set(key, values[index]);
+    });
+    
+    const entries = hashMap.entries();
+    expect(entries.next().value).toEqual([keys[0], values[0]]);
+    expect(entries.next().value).toEqual([keys[1], values[1]]);
+    expect(entries.next().value).toEqual([keys[2], values[2]]);
   });
 });
