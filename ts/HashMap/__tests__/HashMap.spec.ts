@@ -1,5 +1,5 @@
 /// <reference types='jest' />
-import HashMap, { ObjectWithHash } from '../HashMap';
+import { HashMap, ObjectWithHash } from '../HashMap';
 
 class TestClassWithHash {
   name:string;

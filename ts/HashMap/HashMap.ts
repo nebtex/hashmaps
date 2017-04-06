@@ -1,12 +1,13 @@
 import * as objectHash from 'object-hash';
+import { ObservableMap } from 'mobx';
 
 export interface ObjectWithHash {
     hash?: {():string}
 }
 
-export default class HashMap<K extends ObjectWithHash, V> {
-    private internalMap: Map<string, V>;
-    private keyMap: Map<string, K>;
+export class HashMap<K extends ObjectWithHash, V> {
+    protected internalMap: Map<string, V> |  ObservableMap<V> ;
+    protected keyMap: Map<string, K>;
 
     constructor() {
         this.internalMap = new Map<string, V>();
@@ -49,7 +50,7 @@ export default class HashMap<K extends ObjectWithHash, V> {
     }
 
     values(): IterableIterator<V> {
-        return this.internalMap.values()
+        return this.internalMap.values() as IterableIterator<V>;
     }
 
     delete(key: K) {

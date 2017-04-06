@@ -1637,6 +1637,10 @@ mkdirp@0.5.x, mkdirp@^0.5.1:
   dependencies:
     minimist "0.0.8"
 
+mobx@^3.1.8:
+  version "3.1.8"
+  resolved "https://registry.yarnpkg.com/mobx/-/mobx-3.1.8.tgz#94a24ce41baa9d0ccf3bd71b17dbe093bb0e1b05"
+
 ms@0.7.2:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.2.tgz#ae25cf2512b3885a1d95d7f037868d8431124765"
