@@ -18,6 +18,7 @@ export class HashMap<K extends ObjectWithHash, V> {
         const hash = key.hash ? key.hash() : objectHash(key);
         this.internalMap.set(hash, value);
         this.keyMap.set(hash, key);
+        return this;
     }
 
     get(key: K): V {
