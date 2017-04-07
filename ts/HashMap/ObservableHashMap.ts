@@ -1,17 +1,29 @@
 import { HashMap, ObjectWithHash } from './HashMap';
-import { IInterceptable, IMapWillChange, observable, ObservableMap, IInterceptor, IMapChange, IListenable } from 'mobx';
+import { Lambda, IObservableArray, IMap, IMapWillChange, observable, ObservableMap, IInterceptor, IMapChange } from 'mobx';
 import * as objectHash from 'object-hash';
 
 const ObservableMapMarker = {};
 
-export class ObservableHashMap<K extends ObjectWithHash, V> extends HashMap<K, V> implements IInterceptable<IMapWillChange<V>>, IListenable{
+interface IInterceptable<T> {
+  intercept(handler: IInterceptor<T>): Lambda;
+}
+
+interface IListenable {
+  observe(handler: (change: any, oldValue?: any) => void, fireImmediately?: boolean): Lambda;
+}
+
+export class ObservableHashMap<K extends ObjectWithHash, V> implements IMap<K, V>, IInterceptable<IMapWillChange<V>>, IListenable {
   $mobx = ObservableMapMarker;
-  interceptors:any = null;
-  changeListeners:any = null;
+  @observable internalMap: ObservableMap<V>
+  @observable keys: IObservableArray<K>
+  @observable keyMap: ObservableMap<K>
 
   constructor() {
-    super()
     this.internalMap = observable.map<V>() as ObservableMap<V>;
+  }
+
+  entries(){
+
   }
 
   set(key: K, value: V) {
@@ -21,7 +33,7 @@ export class ObservableHashMap<K extends ObjectWithHash, V> extends HashMap<K, V
   }
 
   observe(listener: (changes: IMapChange<V>) => any) {
-    return (this.internalMap as ObservableMap<V>).observe(listener) 
+    return (this.internalMap as ObservableMap<V>).observe(listener)
   }
 
   intercept(handler: IInterceptor<IMapWillChange<V>>) {
