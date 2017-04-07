@@ -11,7 +11,7 @@ HashMap
 
 A class that allows you to create a map with objects as keys/values, if the key object has a hash function `hash()`, the hashMap instance is going to use that function result as key internally, If the key object does not have the hash function defined it is going to use a obtained hash with the `object-hash` library as follows.
 
-```
+``` javascript
 import objectHash from 'object-hash'
 const hash = key.hash ? key.hash() : objectHash(key);
 ```
@@ -23,7 +23,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 
 ##Examples
 ### Typescript
-```
+``` typescript
 import { HashMap } from '@nebtex/hashmap';
 
 const hashMap = new HashMap<any, number>();
@@ -55,7 +55,7 @@ hashMap.clear(); // Removes all key/value pairs
 ```
 
 ### Javascript
-```
+```javascript
 import { HashMap } from '@nebtex/hashmap';
 
 const hashMap = new HashMap();
