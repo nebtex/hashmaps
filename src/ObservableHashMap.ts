@@ -49,8 +49,7 @@ export class ObservableHashMap<K extends ObjectWithHash, V> implements IMap<K, V
 
   delete(key:K) {
     if(this.has(key)){
-      const hash = key.hash ? key.hash() : objectHash(key);        
-      
+      const hash = key.hash ? key.hash() : objectHash(key);
       this.internalMap.delete(hash);
       this.keyMap.delete(hash);
       return true;

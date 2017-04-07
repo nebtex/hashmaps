@@ -53,7 +53,8 @@ describe('ObservableHashMap', () => {
     
     hashMap.set({a:1, b:2}, 80);
     hashMap.set({a:1, b:3}, 90);
-    hashMap.set({a:1, b:5}, 70);
+    const hashMapReference = hashMap.set({a:1, b:5}, 70);
+    expect(hashMapReference).toBe(hashMap);
   });
 
   it('should clear its items', () => {
@@ -175,13 +176,17 @@ describe('ObservableHashMap', () => {
     const keys = [
       new TestClassWithHash('testname'), 
       new TestClassWithHash('testname1'), 
-      new TestClassWithHash('testname2')
+      new TestClassWithHash('testname2'),
+      new TestClassWithHash('testname3'), 
+      new TestClassWithHash('testname4')
     ];
 
     const values = [
       {phoneNumber: '333-22-331', email: 'test@gmail.com'},
       {phoneNumber: '333-22-323', email: 'test1@gmail.com'},
-      {phoneNumber: '333-22-313', email: 'test2@gmail.com'}
+      {phoneNumber: '333-22-313', email: 'test2@gmail.com'},
+      {phoneNumber: '333-22-323', email: 'test3@gmail.com'},
+      {phoneNumber: '333-22-313', email: 'test4@gmail.com'},
     ];
     
     keys.forEach((key, index) => {
@@ -197,5 +202,39 @@ describe('ObservableHashMap', () => {
       counter++;
     });
     expect(counter).toBe(hashMap.size);
+  });
+
+  it("should have a observe function which behavior is defined as expected (object has mutated) when new key/value is added", () => {
+    hashMap.observe(change => expect(change.type).toBe('add'));
+    hashMap.set({a:56}, 45);
+  });
+  
+  it("should have a observe function which behavior is defined as expected (object has mutated) when value is updated", () => {
+    hashMap.set({a:56}, 45);
+    hashMap.observe(change => expect(change.type).toBe('update'));
+    hashMap.set({a:56}, 46);
+  });
+  
+  it("should have a observe function which behavior is defined as expected (object has mutated) when value is deleted", () => {
+    hashMap.set({a:56}, 47);
+    hashMap.observe(change => expect(change.type).toBe('delete'));
+    hashMap.delete({a:56});
+  });
+  
+  it("should have a observe function which behavior is defined as expected (object has mutated) when clear is called", () => {
+    hashMap.set({a:56}, 47);
+    hashMap.observe(change => expect(change.type).toBe('delete'));    
+    hashMap.clear();
+  });
+
+  it("should use the intercept function if it's required", () => {
+    const hashMap = new ObservableHashMap<{}, number>();
+    let counter = 0;
+    hashMap.intercept(change => {
+      counter++;
+      return change
+    });
+    hashMap.set({a:45}, 45);
+    expect(counter).toBe(1);
   });
 });
