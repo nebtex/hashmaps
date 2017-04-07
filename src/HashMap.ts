@@ -61,7 +61,7 @@ export class HashMap<K extends ObjectWithHash, V> {
     delete(key: K) {
         const hash = key.hash ? key.hash() : objectHash(key);        
         this.internalMap.delete(hash);
-        this.keyMap.delete(hash);
+        return this.keyMap.delete(hash);
     }
 
     forEach(callBack:{(value?:V, key?: K, hashMap?:HashMap<K,V>):void}){
