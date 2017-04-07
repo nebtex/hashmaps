@@ -12,10 +12,12 @@
     "outDir": "./dist/",
     "preserveConstEnums": true,
     "removeComments": true,
+    "declaration":true,
     "experimentalDecorators": true,
     "target": "ES5"
   },
   "exclude": [
+    "dist",
     "node_modules",
     "**/*.spec.ts"
   ]

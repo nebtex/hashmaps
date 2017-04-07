@@ -2,10 +2,13 @@
   "name": "hashmap-library",
   "version": "1.0.0",
   "description": "A HasMap/HashMapObservable library for Typescript",
-  "main": "js/index.js",
   "module": "commonjs",
   "typings": "js/index",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "prepublish": "npm run tsc",
+    "tsc": "tsc",
     "test": "jest"
   },
   "repository": {

@@ -4,11 +4,11 @@ import * as objectHash from 'object-hash';
 
 const ObservableMapMarker = {};
 
-interface IInterceptable<T> {
+export interface IInterceptable<T> {
   intercept(handler: IInterceptor<T>): Lambda;
 }
 
-interface IListenable {
+export interface IListenable {
   observe(handler: (change: any, oldValue?: any) => void, fireImmediately?: boolean): Lambda;
 }
 
