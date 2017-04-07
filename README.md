@@ -16,6 +16,10 @@ import objectHash from 'object-hash'
 const hash = key.hash ? key.hash() : objectHash(key);
 ```
 
+> **Note:**
+
+> - For more info about `object-hash` library see: https://github.com/puleos/object-hash
+
 ## API
 
 The HashMap Class implements the IMap<K, V> interface, for more info about the available methods/properties see: 
@@ -61,6 +65,53 @@ import { HashMap } from '@nebtex/hashmap';
 const hashMap = new HashMap();
 
 /*
-  All the same methods and properties as the typescript example
+  All the same methods and properties as typescript example
+*/
+```
+
+ObservableHashMap
+--------------
+
+A dinamically keyed obserbable HashMap for Mobx, it has the same properties/methods as HashMap class, with two additional methods:
+
+#### ObservableHashMap.intercept(interceptor). 
+Registers an interceptor that will be triggered before any changes are applied to the HashMap.
+
+#### ObservableHashMap.observe(listener, fireImmediately?)
+Registers a listener that fires upon each change in this HashMap, similarly to the events that are emitted for Object.observe. 
+
+
+> **Note:**
+
+> - For more info about these two methods see: https://mobx.js.org/refguide/observe.html
+
+
+## Examples
+### Typescript
+``` typescript
+import { ObservableHashMap } from '@nebtex/hashmap';
+import { isObservable } from 'mobx';
+
+const hashMap = new ObservableHashMap<any, number>();
+
+isObservable(hashMap); // true
+
+/*
+  All the same methods and properties as HashMap class
+*/
+
+```
+
+#### Javascript
+```javascript
+import { ObservableHashMap } from '@nebtex/hashmap';
+import { isObservable } from 'mobx';
+
+const hashMap = new ObservableHashMap();
+
+isObservable(hashMap); // true
+
+/*
+  All the same methods and properties as HashMap class
 */
 ```
