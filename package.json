@@ -1,6 +1,6 @@
 {
-  "name": "@nebtex/hashmap",
-  "version": "1.0.3",
+  "name": "@nebtex/hashmaps",
+  "version": "0.1.0",
   "description": "A HasMap/HashMapObservable library for Typescript",
   "module": "commonjs",
   "main": "dist/index.js",
