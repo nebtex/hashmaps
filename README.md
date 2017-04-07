@@ -81,9 +81,7 @@ Registers an interceptor that will be triggered before any changes are applied t
 Registers a listener that fires upon each change in this HashMap, similarly to the events that are emitted for Object.observe. 
 
 
-> **Note:**
-
-> - For more info about these two methods see: https://mobx.js.org/refguide/observe.html
+> **Note:** For more info about these two methods see: https://mobx.js.org/refguide/observe.html
 
 
 ## Examples
