@@ -32,8 +32,9 @@ describe('ObservableHashMap', () => {
   });
 
   it('should set/get correctly an item', () => {
+    let counter = 0;
     let disposer = autorun(() => {
-      switch(hashMap.size){
+      switch(counter){
         case 1:
           expect(hashMap.get({a:1, b:2})).toBe(80);          
         break;
@@ -47,6 +48,7 @@ describe('ObservableHashMap', () => {
           expect(hashMap.get({a:1, b:5})).toBe(70);
         break
       }
+      counter ++;
     });
     
     hashMap.set({a:1, b:2}, 80);

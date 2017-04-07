@@ -15,13 +15,11 @@ interface IListenable {
 export class ObservableHashMap<K extends ObjectWithHash, V> implements IMap<K, V>, IInterceptable<IMapWillChange<V>>, IListenable {
   $mobx = ObservableMapMarker;
   @observable internalMap: ObservableMap<V>
-  @observable _keys: IObservableArray<K>
   @observable keyMap: ObservableMap<K>
 
   constructor() {
     this.internalMap = observable.map<V>();
     this.keyMap = observable.map<K>();
-    this._keys = observable.array<K>();
   }
 
   entries(){
@@ -37,16 +35,11 @@ export class ObservableHashMap<K extends ObjectWithHash, V> implements IMap<K, V
   clear() {
     this.internalMap.clear();
     this.keyMap.clear();
-    this._keys.clear();
   }
 
   get size(): number {
     return this.internalMap.size;
   }
-
-  private _has(key: K): boolean {
-    return this._keys.map(key => key.hash ? key.hash() : objectHash(key)).indexOf(key.hash? key.hash() : objectHash(key)) >= 0;
-	}
 
   forEach(callbackfn:{(value?:V, index?: K, map?:IMap<K,V>):void}, thisArg?: any){
       this.keyMap.forEach((keyItem, hash) => {
@@ -55,13 +48,11 @@ export class ObservableHashMap<K extends ObjectWithHash, V> implements IMap<K, V
   }
 
   delete(key:K) {
-    if(this._has(key)){
+    if(this.has(key)){
       const hash = key.hash ? key.hash() : objectHash(key);        
-      const index = this._keys.map(key => key.hash ? key.hash() : objectHash(key)).indexOf(key.hash? key.hash() : objectHash(key));
       
       this.internalMap.delete(hash);
       this.keyMap.delete(hash);
-      this._keys.splice(index, 1);
       return true;
     }
     return false;
@@ -69,7 +60,6 @@ export class ObservableHashMap<K extends ObjectWithHash, V> implements IMap<K, V
 
   set(key: K, value: V) {
     const hash = key.hash ? key.hash() : objectHash(key);
-    this._keys.push(key);
     this.keyMap.set(hash, key);
     this.internalMap.set(hash, value);
     return this;
