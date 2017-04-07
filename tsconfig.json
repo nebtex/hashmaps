@@ -8,13 +8,17 @@
       "es6"
     ],
     "typeRoots" : ["types"],
+    "noEmitOnError": true,
     "noImplicitAny": true,
+    "sourceMap": false,
+    "inlineSourceMap": true,
     "outDir": "./dist/",
     "preserveConstEnums": true,
     "removeComments": true,
     "declaration":true,
     "experimentalDecorators": true,
-    "target": "ES5"
+    "target": "ES5",
+    "sourceRoot": "./src"
   },
   "exclude": [
     "dist",
