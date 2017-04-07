@@ -8,7 +8,8 @@
   "scripts": {
     "prepublish": "npm run tsc",
     "tsc": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "coverage": "codecov"
   },
   "repository": {
     "type": "git",
@@ -49,6 +50,7 @@
     "@types/core-js": "^0.9.41",
     "@types/jest": "^19.2.2",
     "@types/object-hash": "^0.5.28",
+    "codecov": "^2.1.0",
     "jest": "^19.0.2",
     "ts-jest": "^19.0.7",
     "typescript": "^2.2.2"
