@@ -6,7 +6,7 @@ export interface ObjectWithHash {
 }
 
 export class HashMap<K extends ObjectWithHash, V> {
-    protected internalMap: Map<string, V> |  ObservableMap<V> ;
+    protected internalMap: Map<string, V>;
     protected keyMap: Map<string, K>;
 
     constructor() {
@@ -50,7 +50,11 @@ export class HashMap<K extends ObjectWithHash, V> {
     }
 
     values(): IterableIterator<V> {
-        return this.internalMap.values() as IterableIterator<V>;
+        return this.internalMap.values();
+    }
+
+    keys(): IterableIterator<K> {
+        return this.keyMap.values();
     }
 
     delete(key: K) {
