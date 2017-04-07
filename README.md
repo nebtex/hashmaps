@@ -16,9 +16,7 @@ import objectHash from 'object-hash'
 const hash = key.hash ? key.hash() : objectHash(key);
 ```
 
-> **Note:**
-
-> - For more info about `object-hash` library see: https://github.com/puleos/object-hash
+> **Note:** For more info about `object-hash` library see: https://github.com/puleos/object-hash
 
 ## API
 
