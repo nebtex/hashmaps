@@ -1,5 +1,5 @@
 /// <reference types='jest' />
-import { ObservableHashMap } from '../src/ObservableHashMap';
+import { ObservableHashMap } from '../ObservableHashMap';
 import { autorun, isObservable } from 'mobx';
 
 class TestClassWithHash {
