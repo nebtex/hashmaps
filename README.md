@@ -16,12 +16,12 @@ import objectHash from 'object-hash'
 const hash = key.hash ? key.hash() : objectHash(key);
 ```
 
-##API
+## API
 
 The HashMap Class implements the IMap<K, V> interface, for more info about the available methods/properties see: 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map 
 
-##Examples
+## Examples
 ### Typescript
 ``` typescript
 import { HashMap } from '@nebtex/hashmap';
@@ -54,7 +54,7 @@ hashMap.clear(); // Removes all key/value pairs
 
 ```
 
-### Javascript
+#### Javascript
 ```javascript
 import { HashMap } from '@nebtex/hashmap';
 
