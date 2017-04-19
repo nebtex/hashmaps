@@ -111,3 +111,7 @@ isObservable(hashMap); // true
   All the same methods and properties as HashMap class
 */
 ```
+
+## Licensing
+
+*@nebtex/hashmaps* is licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) for the full license text.
