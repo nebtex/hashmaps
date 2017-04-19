@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/nebtex/hashmap.svg?branch=master)](https://travis-ci.org/nebtex/hashmap)
+[![Build Status](https://travis-ci.org/nebtex/hashmaps.svg?branch=master)](https://travis-ci.org/nebtex/hashmaps)
 [![codecov](https://codecov.io/gh/nebtex/hashmaps/branch/master/graph/badge.svg)](https://codecov.io/gh/nebtex/hashmaps)
 
 HashMap / ObservableHashMap
