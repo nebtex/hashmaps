@@ -20,7 +20,7 @@
     "ObservableHashMap"
   ],
   "author": "NebTex",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/nebtex/hashmap/issues"
   },
