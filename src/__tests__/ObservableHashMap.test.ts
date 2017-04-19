@@ -169,30 +169,30 @@ test('set an item correctly when key value does not have a hash function', t => 
   t.is(hashMap.get({a:1, b:2}), 80);
 });
 
-test("should have a observe function which behavior is defined as expected (object has mutated) when new key/value is added", t => {
+test("have a observe function which behavior is defined as expected (object has mutated) when new key/value is added", t => {
   hashMap.observe(change => t.is(change.type, 'add'));
   hashMap.set({a:56}, 45);
 });
 
-test("should have a observe function which behavior is defined as expected (object has mutated) when value is updated", t => {
+test("have a observe function which behavior is defined as expected (object has mutated) when value is updated", t => {
   hashMap.set({a:56}, 45);
   hashMap.observe(change => t.is(change.type, 'update'));
   hashMap.set({a:56}, 46);
 });
 
-test("should have a observe function which behavior is defined as expected (object has mutated) when value is deleted", t => {
+test("have a observe function which behavior is defined as expected (object has mutated) when value is deleted", t => {
   hashMap.set({a:56}, 47);
   hashMap.observe(change => t.is(change.type, 'delete'));
   hashMap.delete({a:56});
 });
 
-test("should have a observe function which behavior is defined as expected (object has mutated) when clear is called", t => {
+test("have a observe function which behavior is defined as expected (object has mutated) when clear is called", t => {
   hashMap.set({a:56}, 47);
   hashMap.observe(change => t.is(change.type, 'delete'));    
   hashMap.clear();
 });
 
-test("should use the intercept function if it's required", t => {
+test("use the intercept function if it's required", t => {
   const hashMap = new ObservableHashMap<{}, number>();
   let counter = 0;
   hashMap.intercept(change => {
