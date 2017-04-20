@@ -21,6 +21,10 @@ export class HashMap<K extends ObjectWithHash, V> {
         return this;
     }
 
+    hash(array:Array<number>):string{
+        return array.join("/");
+    }
+
     get(key: K): V {
         const hash = key.hash ? key.hash() : objectHash(key);
         return this.internalMap.get(hash);

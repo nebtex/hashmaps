@@ -168,3 +168,9 @@ test('set an item correctly when key value does not have a hash function', t => 
   hashMap.set({a:1, b:2}, 80)
   t.is(hashMap.get({a:1, b:2}), 80);
 });
+
+test('hash function should return the correct value', t => {
+  t.is(hashMap.hash([1,2,3]), '1/2/3');
+  t.is(hashMap.hash([15,24,1]), '15/24/1');
+  t.is(hashMap.hash([1,12,124]), '1/12/124');
+});
