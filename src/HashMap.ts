@@ -14,7 +14,7 @@ export class HashMap<K extends ObjectWithHash, V> {
         this.keyMap = new Map<string, K>();
     }
 
-    protected objectHash(key:K){
+    protected objectHash(key:K):string{
         return generateHash(key);
     }
 

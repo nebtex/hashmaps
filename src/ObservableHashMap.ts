@@ -1,6 +1,6 @@
 import { HashMap, ObjectWithHash } from './HashMap';
 import { Lambda, IObservableArray, IMap, IMapWillChange, observable, ObservableMap, IInterceptor, IMapChange } from 'mobx';
-import * as objectHash from 'object-hash';
+import * as generateHash from 'object-hash';
 
 const ObservableMapMarker = {};
 
@@ -20,6 +20,10 @@ export class ObservableHashMap<K extends ObjectWithHash, V> implements IMap<K, V
   constructor() {
     this.internalMap = observable.map<V>();
     this.keyMap = observable.map<K>();
+  }
+
+  protected objectHash(key:K):string{
+      return generateHash(key);
   }
 
   entries(){
@@ -49,7 +53,7 @@ export class ObservableHashMap<K extends ObjectWithHash, V> implements IMap<K, V
 
   delete(key:K) {
     if(this.has(key)){
-      const hash = key.hash ? key.hash() : objectHash(key);
+      const hash = key.hash ? key.hash() : this.objectHash(key);
       this.internalMap.delete(hash);
       this.keyMap.delete(hash);
       return true;
@@ -58,7 +62,7 @@ export class ObservableHashMap<K extends ObjectWithHash, V> implements IMap<K, V
   }
 
   set(key: K, value: V) {
-    const hash = key.hash ? key.hash() : objectHash(key);
+    const hash = key.hash ? key.hash() : this.objectHash(key);
     this.keyMap.set(hash, key);
     this.internalMap.set(hash, value);
     return this;
@@ -73,7 +77,7 @@ export class ObservableHashMap<K extends ObjectWithHash, V> implements IMap<K, V
   }
 
   get(key:K) {
-    const hash = key.hash ? key.hash() : objectHash(key);
+    const hash = key.hash ? key.hash() : this.objectHash(key);
     return this.internalMap.get(hash);
   }
 
@@ -86,7 +90,7 @@ export class ObservableHashMap<K extends ObjectWithHash, V> implements IMap<K, V
   }
 
   has(key: K): boolean {
-      const hash = key.hash ? key.hash() : objectHash(key);        
+      const hash = key.hash ? key.hash() : this.objectHash(key);        
       return this.internalMap.has(hash)
   }
 }
