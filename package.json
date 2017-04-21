@@ -27,7 +27,6 @@
   "homepage": "https://github.com/nebtex/hashmap#readme",
   "devDependencies": {
     "@types/core-js": "^0.9.41",
-    "@types/jest": "^19.2.2",
     "@types/object-hash": "^0.5.28",
     "ava": "^0.19.1",
     "codecov": "^2.1.0",
