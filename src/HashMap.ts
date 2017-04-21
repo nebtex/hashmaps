@@ -1,4 +1,4 @@
-import * as objectHash from 'object-hash';
+import * as generateHash from 'object-hash';
 import { ObservableMap } from 'mobx';
 
 export interface ObjectWithHash {
@@ -14,19 +14,19 @@ export class HashMap<K extends ObjectWithHash, V> {
         this.keyMap = new Map<string, K>();
     }
 
+    protected objectHash(key:K){
+        return generateHash(key);
+    }
+
     set(key: K, value: V) {
-        const hash = key.hash ? key.hash() : objectHash(key);
+        const hash = key.hash ? key.hash() : this.objectHash(key);
         this.internalMap.set(hash, value);
         this.keyMap.set(hash, key);
         return this;
     }
 
-    hash(array:Array<number>):string{
-        return array.join("/");
-    }
-
     get(key: K): V {
-        const hash = key.hash ? key.hash() : objectHash(key);
+        const hash = key.hash ? key.hash() : this.objectHash(key);
         return this.internalMap.get(hash);
     }
 
@@ -36,7 +36,7 @@ export class HashMap<K extends ObjectWithHash, V> {
     }
 
     has(key: K): boolean {
-        const hash = key.hash ? key.hash() : objectHash(key);        
+        const hash = key.hash ? key.hash() : this.objectHash(key);        
         return this.internalMap.has(hash)
     }
 
@@ -63,7 +63,7 @@ export class HashMap<K extends ObjectWithHash, V> {
     }
 
     delete(key: K) {
-        const hash = key.hash ? key.hash() : objectHash(key);        
+        const hash = key.hash ? key.hash() : this.objectHash(key);        
         this.internalMap.delete(hash);
         return this.keyMap.delete(hash);
     }
