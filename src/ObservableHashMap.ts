@@ -20,6 +20,13 @@ export interface IHashMapWillChange<K, V>{
   type: "update" | "add" | "delete";
 }
 
+export interface IHashMapChange<K, V>{
+  name: string;
+  object: ObservableMap<V>;
+  key: K;
+  type: "update" | "add" | "delete";
+}
+
 export class ObservableHashMap<K extends ObjectWithHash, V> implements IMap<K, V>, IInterceptable<IHashMapWillChange<K, V>>, IListenable {
   $mobx = ObservableMapMarker;
   @observable internalMap: ObservableMap<V>
@@ -76,8 +83,13 @@ export class ObservableHashMap<K extends ObjectWithHash, V> implements IMap<K, V
     return this;
   }
 
-  observe(listener: (changes: IMapChange<V>) => any) {
-    return (this.internalMap as ObservableMap<V>).observe(listener)
+  observe(listener: (changes: IHashMapChange<K, V>) => any, fireImmediately?:boolean) {
+    let listenerModifier = (changes:any) => {
+      const hash = changes.name;
+      changes.key = JSON.parse(JSON.stringify(this.keyMap.get(hash)));
+      return listener(changes);
+    }
+    return (this.internalMap as ObservableMap<V>).observe(listenerModifier, fireImmediately);
   }
 
   intercept(handler: IInterceptor<IHashMapWillChange<K, V>>) {

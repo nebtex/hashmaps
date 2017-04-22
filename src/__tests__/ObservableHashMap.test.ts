@@ -188,7 +188,9 @@ test("have a observe function which behavior is defined as expected (object has 
 
 test("have a observe function which behavior is defined as expected (object has mutated) when clear is called", t => {
   hashMap.set({a:56}, 47);
-  hashMap.observe(change => t.is(change.type, 'delete'));    
+  hashMap.observe(change => {
+    t.is(change.type, 'delete')
+  });
   hashMap.clear();
 });
 
