@@ -1,5 +1,5 @@
 import { HashMap, ObjectWithHash } from './HashMap';
-import { Lambda, IObservableArray, IMap, observable, ObservableMap, IInterceptor, IMapChange } from 'mobx';
+import { Lambda, IObservableArray, IMap, observable, ObservableMap, IInterceptor } from 'mobx';
 import * as generateHash from 'object-hash';
 
 const ObservableMapMarker = {};
