@@ -29,8 +29,8 @@ export interface IHashMapChange<K, V>{
 
 export class ObservableHashMap<K extends ObjectWithHash, V> implements IMap<K, V>, IInterceptable<IHashMapWillChange<K, V>>, IListenable {
   $mobx = ObservableMapMarker;
-  @observable internalMap: ObservableMap<V>
-  @observable keyMap: ObservableMap<K>
+  @observable protected  internalMap: ObservableMap<V>
+  @observable protected keyMap: ObservableMap<K>
 
   constructor() {
     this.internalMap = observable.map<V>();
