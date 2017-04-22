@@ -1,5 +1,5 @@
 import { HashMap, ObjectWithHash } from './HashMap';
-import { Lambda, IObservableArray, IMap, IMapWillChange, observable, ObservableMap, IInterceptor, IMapChange } from 'mobx';
+import { Lambda, IObservableArray, IMap, observable, ObservableMap, IInterceptor, IMapChange } from 'mobx';
 import * as generateHash from 'object-hash';
 
 const ObservableMapMarker = {};
@@ -12,7 +12,15 @@ export interface IListenable {
   observe(handler: (change: any, oldValue?: any) => void, fireImmediately?: boolean): Lambda;
 }
 
-export class ObservableHashMap<K extends ObjectWithHash, V> implements IMap<K, V>, IInterceptable<IMapWillChange<V>>, IListenable {
+export interface IHashMapWillChange<K, V>{
+  name: string;
+  newValue: V;
+  object: ObservableMap<V>;
+  key: K;
+  type: "update" | "add" | "delete";
+}
+
+export class ObservableHashMap<K extends ObjectWithHash, V> implements IMap<K, V>, IInterceptable<IHashMapWillChange<K, V>>, IListenable {
   $mobx = ObservableMapMarker;
   @observable internalMap: ObservableMap<V>
   @observable keyMap: ObservableMap<K>
@@ -72,8 +80,14 @@ export class ObservableHashMap<K extends ObjectWithHash, V> implements IMap<K, V
     return (this.internalMap as ObservableMap<V>).observe(listener)
   }
 
-  intercept(handler: IInterceptor<IMapWillChange<V>>) {
-    return (this.internalMap as ObservableMap<V>).intercept(handler)
+  intercept(handler: IInterceptor<IHashMapWillChange<K, V>>) {
+    let handlerModifier = (change:any) => {
+      const hash = change.name;
+      change.key = JSON.parse(JSON.stringify(this.keyMap.get(hash)));
+      return handler(change);
+    }
+
+    return (this.internalMap as ObservableMap<V>).intercept(handlerModifier);
   }
 
   get(key:K) {

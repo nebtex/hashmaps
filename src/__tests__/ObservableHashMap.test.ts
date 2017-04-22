@@ -196,6 +196,8 @@ test("use the intercept function if it's required", t => {
   const hashMap = new ObservableHashMap<{}, number>();
   let counter = 0;
   hashMap.intercept(change => {
+    t.deepEqual(change.newValue, 45);
+    t.deepEqual(JSON.stringify(change.key), JSON.stringify({a:45}));    
     counter++;
     return change
   });
