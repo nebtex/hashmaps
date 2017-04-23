@@ -24,6 +24,8 @@ export interface IHashMapChange<K, V>{
   name: string;
   object: ObservableMap<V>;
   key: K;
+  newValue: V;
+  oldValue: V;
   type: "update" | "add" | "delete";
 }
 
